@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LibSys.Models.Dto.ReaderBorrowingDto>
+
+@{
+    ViewData["Title"] = "Sprawdź wypożyczone książki";
+}
+<h1>Sprawdź wypożyczone książki</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <form asp-controller="Borrowings" asp-action="ReaderBorrowings" asp-route-readerId="">
+            <div class="form-group">
+                <input class="form-control" type="text" name="readerId" id="readerId" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sprawdź" class="btn btn-primary mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table id="dataTable" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(modelItem => modelItem.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => modelItem.BorrowDate)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(modelItem => modelItem.ReturnDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Convert.ToDateTime(item.BorrowDate).ToString("dd.MM.yyyy")
+                    </td>
+                    <td>
+                        @Convert.ToDateTime(item.ReturnDate).ToString("dd.MM.yyyy")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script>
+        new DataTable('#dataTable', {
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pl.json',
+            },
+        });
+    </script>
+}

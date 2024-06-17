@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LibSys.Models.Entities.BookDefinition>
+
+@{
+    ViewData["Title"] = "Lista definicji";
+}
+
+<h1>Lista definicji książek</h1>
+
+<p>
+    <a asp-action="Create">Dodaj definicje</a>
+</p>
+<table id="dataTable" class="table" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(modelItem => modelItem.Title)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => modelItem.Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script>
+    new DataTable('#dataTable', {
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pl.json',
+        },
+    });
+</script>

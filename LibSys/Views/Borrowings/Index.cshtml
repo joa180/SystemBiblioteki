@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LibSys.Models.Entities.Borrowing>
+
+@{
+    ViewData["Title"] = "Wypożyczenia";
+}
+
+<h1>Wypożyczenia</h1>
+
+<p>
+    <a asp-action="Create">Dodaj nowe</a>
+</p>
+<table id="dataTable" class="table" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reader)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Convert.ToDateTime(item.BorrowDate).ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Convert.ToDateTime(item.ReturnDate).ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reader.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    new DataTable('#dataTable', {
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pl.json',
+        },
+    });
+</script>

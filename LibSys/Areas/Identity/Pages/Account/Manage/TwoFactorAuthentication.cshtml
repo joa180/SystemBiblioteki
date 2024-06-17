@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Features
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "Autoryzacja dwuetapowa (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+@{
+    var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+    @if (consentFeature?.CanTrack ?? true)
+    {
+        @if (Model.Is2faEnabled)
+        {
+            if (Model.RecoveryCodesLeft == 0)
+            {
+                <div class="alert alert-danger">
+                    <strong>Nie masz już dostępnych kodów odzyskiwania.</strong>
+                    <p>Musisz <a asp-page="./GenerateRecoveryCodes">wygenerować nowe kody odzyskiwania</a>, zanim będziesz mógł się zalogować kodem odzyskiwania.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft == 1)
+            {
+                <div class="alert alert-danger">
+                    <strong>Masz 1 kod odzyskiwania.</strong>
+                    <p>Możesz <a asp-page="./GenerateRecoveryCodes">wygenerować nowy zestaw kodów odzyskiwania</a>.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft <= 3)
+            {
+                <div class="alert alert-warning">
+                    <strong>Masz @Model.RecoveryCodesLeft kody odzyskiwania pozostałe.</strong>
+                    <p>Wskazane jest <a asp-page="./GenerateRecoveryCodes">wygenerowanie nowego zestawu kodów odzyskiwania</a>.</p>
+                </div>
+            }
+
+            if (Model.IsMachineRemembered)
+            {
+                <form method="post" style="display: inline-block">
+                    <button type="submit" class="btn btn-primary">Zapomnij tę przeglądarkę</button>
+                </form>
+            }
+            <a asp-page="./Disable2fa" class="btn btn-primary">Wyłącz 2FA</a>
+            <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Zresetuj kody odzyskiwania</a>
+        }
+
+        <h4>Aplikacja autentykatora</h4>
+        @if (!Model.HasAuthenticator)
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Dodaj aplikację autentykatora</a>
+        }
+        else
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Skonfiguruj aplikację autentykatora</a>
+            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Zresetuj aplikację autentykatora</a>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Nie zaakceptowano polityki prywatności i plików cookie.</strong>
+            <p>Musisz zaakceptować politykę przed włączeniem autoryzacji dwuetapowej.</p>
+        </div>
+    }
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

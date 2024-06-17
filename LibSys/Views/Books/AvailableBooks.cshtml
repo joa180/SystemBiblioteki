@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<LibSys.Models.Dto.AvailableBookDto>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Dostępne książki";
+}
+
+<h1>Dostępne książki</h1>
+
+<table id="dataTable" class="table">
+    <thead>
+        <tr>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th>
+                    @Html.DisplayNameFor(modelItem => modelItem.Id)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(modelItem => modelItem.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => modelItem.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => modelItem.Count)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (SignInManager.IsSignedIn(User))
+            {   <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @Html.ActionLink("Wypożycz", "Create", "Borrowings", new {itemId = item.Id})
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script>
+    new DataTable('#dataTable', {
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pl.json',
+        },
+    });
+</script>

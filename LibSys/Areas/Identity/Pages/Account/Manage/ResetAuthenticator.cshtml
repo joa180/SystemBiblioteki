@@ -1,0 +1,24 @@
+﻿@page
+@model ResetAuthenticatorModel
+@{
+    ViewData["Title"] = "Zresetuj klucz uwierzetylnienia";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>Jeśli zresetujesz swój klucz uwierzetylnienia, twoja aplikacja uwierzetylnienia przestanie działać, dopóki jej ponownie nie skonfigurujesz.</strong>
+    </p>
+    <p>
+        Ten proces dezaktywuje dwuetapową autoryzację, dopóki nie zweryfikujesz swojej aplikacji uwierzetylnienia.
+        Jeśli nie zakończysz konfiguracji aplikacji uwierzetylnienia, możesz utracić dostęp do swojego konta.
+    </p>
+</div>
+<div>
+    <form id="reset-authenticator-form" method="post">
+        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">Zresetuj klucz uwierzetylnienia</button>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@model LibSys.Models.Entities.Borrowing
+
+@{
+    ViewData["Title"] = "Szczegóły wypożyczenia";
+}
+
+<h1>Szczegóły</h1>
+
+<div>
+    <h4>Wypożyczenie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BorrowDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Convert.ToDateTime(Model.BorrowDate).ToString("dd.MM.yyyy")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Convert.ToDateTime(Model.ReturnDate).ToString("dd.MM.yyyy")
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Book)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Book.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reader)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reader.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj</a> |
+    <a asp-action="Index">Wróć do listy</a>
+</div>

@@ -1,0 +1,27 @@
+﻿@page
+@model GenerateRecoveryCodesModel
+@{
+    ViewData["Title"] = "Generuj kody odzyskiwania dwuetapowego uwierzytelniania (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>Przechowaj te kody w bezpiecznym miejscu.</strong>
+    </p>
+    <p>
+        Jeśli utracisz swoje urządzenie i nie będziesz mieć kodów odzyskiwania, utracisz dostęp do swojego konta.
+    </p>
+    <p>
+        Generowanie nowych kodów odzyskiwania nie zmienia kluczy używanych w aplikacjach autoryzacyjnych. Jeśli chcesz zmienić klucz
+        używany w aplikacji autoryzacyjnej, powinieneś <a asp-page="./ResetAuthenticator">zresetować swoje klucze autoryzacyjne.</a>
+    </p>
+</div>
+<div>
+    <form method="post">
+        <button class="btn btn-danger" type="submit">Generuj Kody Odzyskiwania</button>
+    </form>
+</div>
