@@ -1,8 +1,7 @@
 # Wypożyczalnia Książek
 
 ## Wprowadzenie
-Początkowo planowaliśmy stworzyć blog, gdzie użytkownicy niezalogowani mogliby czytać treści, a zalogowani mieliby możliwość ich edycji. Jednak ta koncepcja wydawała się zbyt prosta. Gdy próbowaliśmy dodać więcej funkcji, napotkaliśmy problemy koncepcyjne, które przerosły nasze oczekiwania. Z tego powodu zmieniliśmy projekt na system wypożyczalni książek. Nie jest on jeszcze doskonały, ale udało nam się go opracować w czasie, który mieliśmy po zmianie koncepcji.
-W naszym systemie tworzenie nowych kont użytkowników jest możliwe wyłącznie przez administratora. Osoby, które zostaną dodane przez administratora, również otrzymują prawa administracyjne. 
+W moim systemie tworzenie nowych kont użytkowników jest możliwe wyłącznie przez administratora. Osoby, które zostaną dodane przez administratora, również otrzymują prawa administracyjne. 
 Zwykli użytkownicy, jeśli znają ID innego użytkownika, mają możliwość wyszukiwania listy książek, które ten użytkownik wypożyczył. Wypożyczanie książek jest możliwe tylko dla użytkowników zalogowanych. 
 Przykładowe ID użytkownika do sprawdzenia : 5d31a024-4e84-4f5e-b86b-04b10d79559e
 
